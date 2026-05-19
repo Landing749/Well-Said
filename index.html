@@ -56,7 +56,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--ww);color:var(--tx);overf
 @keyframes ldRipple{0%{transform:translate(-50%,-50%) scale(.7);opacity:.8}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
 
 /* text */
-.ld-tag{color:rgba(26,10,10,.8);font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;letter-spacing:1.5px;margin-top:28px;opacity:0;animation:ldFadeUp .9s cubic-bezier(.4,0,.2,1) .65s forwards}
+.ld-tag{color:rgba(26,10,10,.8);font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;letter-spacing:1.5px;margin-top:28px;opacity:1;min-height:1.4em;display:flex;align-items:center;justify-content:center}
+.ld-cursor{display:inline-block;width:1.5px;height:1.1em;background:rgba(139,0,0,.7);margin-left:2px;vertical-align:text-bottom;animation:ldBlink .6s step-end infinite}
+.ld-cursor.gone{opacity:0;transition:opacity .4s ease}
+@keyframes ldBlink{0%,100%{opacity:1}50%{opacity:0}}
 .ld-ornament{display:flex;align-items:center;gap:10px;margin:10px auto;opacity:0;animation:ldFadeUp .7s ease .85s forwards}
 .ld-ornament-line{width:36px;height:1px;background:linear-gradient(90deg,transparent,rgba(139,0,0,.35))}
 .ld-ornament-line:last-child{background:linear-gradient(90deg,rgba(139,0,0,.35),transparent)}
@@ -2203,7 +2206,7 @@ ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA
 KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo
 oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k=" alt="Well Said">
   </div>
-  <div class="ld-tag">Speak with Confidence</div>
+  <div class="ld-tag"><span id="ldTagText"></span><span class="ld-cursor" id="ldCursor"></span></div>
   <div class="ld-ornament">
     <div class="ld-ornament-line"></div>
     <div class="ld-ornament-diamond"></div>
@@ -2234,18 +2237,30 @@ oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k=" alt="W
 <script>
 (function(){
   var p=document.getElementById('ldParticles');
-  if(!p)return;
-  var cols=['rgba(139,0,0,.18)','rgba(201,169,110,.25)','rgba(139,0,0,.12)','rgba(201,169,110,.18)'];
-  for(var i=0;i<18;i++){
-    var d=document.createElement('div');
-    d.className='ld-particle';
-    var size=Math.random()*4+2;
-    var left=Math.random()*100;
-    var top=30+Math.random()*50;
-    var dur=4+Math.random()*5;
-    var delay=Math.random()*4;
-    d.style.cssText='width:'+size+'px;height:'+size+'px;left:'+left+'%;top:'+top+'%;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-duration:'+dur+'s;animation-delay:'+delay+'s;border-radius:50%';
-    p.appendChild(d);
+  if(p){
+    var cols=['rgba(139,0,0,.18)','rgba(201,169,110,.25)','rgba(139,0,0,.12)','rgba(201,169,110,.18)'];
+    for(var i=0;i<18;i++){
+      var d=document.createElement('div');
+      d.className='ld-particle';
+      var size=Math.random()*4+2;
+      var left=Math.random()*100;
+      var top=30+Math.random()*50;
+      var dur=4+Math.random()*5;
+      var delay=Math.random()*4;
+      d.style.cssText='width:'+size+'px;height:'+size+'px;left:'+left+'%;top:'+top+'%;background:'+cols[Math.floor(Math.random()*cols.length)]+';animation-duration:'+dur+'s;animation-delay:'+delay+'s;border-radius:50%';
+      p.appendChild(d);
+    }
+  }
+  // typewriter
+  var txt='Speak with Confidence';
+  var el=document.getElementById('ldTagText');
+  var cur=document.getElementById('ldCursor');
+  if(el&&cur){
+    var i=0;
+    setTimeout(function type(){
+      if(i<=txt.length){el.textContent=txt.slice(0,i);i++;setTimeout(type,i===1?0:62);}
+      else{setTimeout(function(){cur.classList.add('gone');},900);}
+    },700);
   }
 })();
 </script>
