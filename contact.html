@@ -157,11 +157,64 @@ body{font-family:'DM Sans',sans-serif;background:var(--dk);min-height:100vh;disp
 .dsb-active{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.2)}
 .dsb-completed{background:rgba(201,169,110,.1);color:var(--g);border:1px solid rgba(201,169,110,.2)}
 
+/* ===== SESSIONS LOG ===== */
+.sessions-list{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.session-item{background:#fff;border:1px solid rgba(139,0,0,.09);border-radius:14px;padding:14px 16px;position:relative;border-left:3px solid rgba(201,169,110,.4)}
+.session-item-date{font-family:'Playfair Display',serif;font-size:15px;color:var(--tx);margin-bottom:3px}
+.session-item-meta{font-size:12px;color:rgba(45,21,21,.6);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.session-item-meta span{display:inline-flex;align-items:center;gap:3px}
+.session-item-note{font-size:12px;color:rgba(45,21,21,.65);line-height:1.5;margin-top:8px;padding-top:8px;border-top:1px solid rgba(139,0,0,.06);font-style:italic}
+.session-empty{font-size:13px;color:rgba(45,21,21,.5);text-align:center;padding:20px;background:rgba(139,0,0,.02);border-radius:12px;border:1px dashed rgba(139,0,0,.1)}
+.session-count-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;background:rgba(201,169,110,.1);border:1px solid rgba(201,169,110,.2);border-radius:100px;font-size:11px;color:var(--g);font-weight:600;margin-left:8px}
+
+/* Progress bar */
+.progress-wrap{margin-top:14px}
+.progress-lbl{display:flex;justify-content:space-between;font-size:11px;color:rgba(45,21,21,.6);margin-bottom:6px}
+.progress-bar{height:6px;background:rgba(139,0,0,.08);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--c),var(--g));border-radius:100px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+
+/* ===== PAYMENT CARD ===== */
+.payment-card{background:#fff;border:1px solid rgba(139,0,0,.1);border-radius:20px;padding:24px;margin-bottom:16px}
+.pay-status-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.pay-badge{padding:5px 14px;border-radius:100px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700}
+.pay-paid{background:rgba(16,185,129,.1);color:#10b981;border:1px solid rgba(16,185,129,.2)}
+.pay-unpaid{background:rgba(245,158,11,.1);color:#f59e0b;border:1px solid rgba(245,158,11,.2)}
+.pay-partial{background:rgba(139,0,0,.08);color:var(--c);border:1px solid rgba(139,0,0,.15)}
+.pay-amounts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.pay-amount-box{background:rgba(139,0,0,.03);border-radius:12px;padding:12px 14px}
+.pay-amount-lbl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(45,21,21,.55);margin-bottom:4px}
+.pay-amount-val{font-family:'Playfair Display',serif;font-size:20px;color:var(--tx)}
+.pay-note-box{background:rgba(201,169,110,.05);border:1px solid rgba(201,169,110,.12);border-radius:10px;padding:10px 14px;font-size:12px;color:rgba(45,21,21,.7);line-height:1.5;margin-top:8px}
+
+/* ===== EDITABLE DETAILS ===== */
+.edit-toggle-btn{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid rgba(139,0,0,.2);background:transparent;color:rgba(45,21,21,.6);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:all .2s;margin-top:4px}
+.edit-toggle-btn:hover{border-color:var(--c);color:var(--c)}
+.edit-toggle-btn.editing{background:var(--c);color:#fff;border-color:var(--c)}
+.edit-form{display:none;margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.edit-form.hidden{display:none}
+.edit-field label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(45,21,21,.55);display:block;margin-bottom:5px}
+.edit-input{width:100%;padding:11px 14px;background:rgba(139,0,0,.04);border:1.5px solid rgba(139,0,0,.15);border-radius:12px;color:var(--tx);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color .3s}
+.edit-input:focus{border-color:rgba(139,0,0,.4)}
+.edit-textarea{resize:none;min-height:80px;line-height:1.5}
+.edit-save-btn{padding:12px 24px;background:var(--c);color:#fff;border:none;border-radius:100px;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .3s;align-self:flex-start}
+.edit-save-btn:hover{background:var(--cp);box-shadow:0 6px 20px rgba(139,0,0,.25)}
+.edit-saved{font-size:12px;color:rgba(45,21,21,.5);margin-top:4px;min-height:16px}
+
+/* ===== MOBILE ===== */
 @media(max-width:600px){
-  .plan-fields,.detail-grid{grid-template-columns:1fr}
-  .portal-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .plan-fields,.detail-grid,.pay-amounts{grid-template-columns:1fr}
+  .portal-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .portal-tabs::-webkit-scrollbar{display:none}
-  .tab-btn{white-space:nowrap;padding:14px 14px}
+  .tab-btn{white-space:nowrap;padding:12px 12px;font-size:11px}
+  .plan-wrap{padding:16px}
+  .details-wrap{padding:16px}
+  .plan-card{padding:18px}
+  .detail-section{padding:16px}
+  body{overflow:auto}
+  #portal{position:relative;min-height:100vh}
+  .portal-body{overflow:visible}
+  .tab-pane{height:auto;min-height:60vh}
+  .chat-wrap{height:calc(100vh - 140px)}
 }
 </style>
 </head>
@@ -3943,6 +3996,10 @@ oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k=" alt="W
               <div class="status-sub" id="planStatusSub">Your inquiry is being reviewed by your coach.</div>
             </div>
           </div>
+          <div class="progress-wrap" id="sessProgressWrap" style="display:none">
+            <div class="progress-lbl"><span>Sessions Completed</span><span id="sessProgressLbl">0 / 0</span></div>
+            <div class="progress-bar"><div class="progress-fill" id="sessProgressFill" style="width:0%"></div></div>
+          </div>
         </div>
         <div class="plan-card">
           <div class="plan-card-title">Session Details</div>
@@ -3967,6 +4024,40 @@ oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k=" alt="W
         </div>
         <button class="plan-save-btn" id="planSaveBtn" onclick="savePref()">Save My Preference</button>
         <div class="plan-saved" id="planSavedMsg"></div>
+
+        <!-- PAYMENT CARD -->
+        <div class="payment-card" id="paymentCard" style="display:none">
+          <div class="plan-card-title" style="color:var(--c);font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px"><span style="width:18px;height:1px;background:var(--c);display:inline-block"></span>Payment</div>
+          <div class="pay-status-row">
+            <div>
+              <div style="font-size:14px;font-weight:600;color:var(--tx)" id="payStatusLabel">—</div>
+              <div style="font-size:12px;color:rgba(45,21,21,.55);margin-top:2px" id="payNoteTxt"></div>
+            </div>
+            <span class="pay-badge pay-unpaid" id="payBadgeClient">Unpaid</span>
+          </div>
+          <div class="pay-amounts">
+            <div class="pay-amount-box">
+              <div class="pay-amount-lbl">Amount Due</div>
+              <div class="pay-amount-val" id="payDueClient">₱—</div>
+            </div>
+            <div class="pay-amount-box">
+              <div class="pay-amount-lbl">Amount Paid</div>
+              <div class="pay-amount-val" id="payPaidClient" style="color:var(--c)">₱—</div>
+            </div>
+          </div>
+          <div id="payNoteBox" style="display:none" class="pay-note-box"></div>
+        </div>
+
+        <!-- SESSIONS LOG CARD -->
+        <div class="plan-card" id="sessionsCard" style="display:none">
+          <div class="plan-card-title">
+            Session Log
+            <span class="session-count-badge" id="sessCountBadge">0 sessions</span>
+          </div>
+          <div class="sessions-list" id="clientSessionList">
+            <div class="session-empty">No sessions logged yet. Check back after your first meeting.</div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- DETAILS TAB -->
@@ -3987,11 +4078,19 @@ oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k=" alt="W
         </div>
         <div class="detail-section">
           <div class="detail-section-title">Personal Information</div>
-          <div class="detail-grid">
+          <div class="detail-grid" id="detailViewGrid">
             <div class="detail-item"><label>Full Name</label><p id="detailName">—</p></div>
             <div class="detail-item"><label>Email</label><p id="detailEmail">—</p></div>
             <div class="detail-item"><label>Phone</label><p id="detailPhone">—</p></div>
             <div class="detail-item"><label>Format</label><p id="detailFmt">—</p></div>
+          </div>
+          <button class="edit-toggle-btn" id="editToggleBtn" onclick="toggleEditForm()">✏️ Edit My Info</button>
+          <div class="edit-form hidden" id="editForm">
+            <div class="edit-field"><label>Full Name</label><input class="edit-input" id="editName" type="text" placeholder="Your full name"></div>
+            <div class="edit-field"><label>Phone</label><input class="edit-input" id="editPhone" type="tel" placeholder="e.g. 09XX XXX XXXX"></div>
+            <div class="edit-field"><label>Your Message / Notes</label><textarea class="edit-input edit-textarea" id="editMsg" placeholder="Any additional notes for your coach..."></textarea></div>
+            <button class="edit-save-btn" onclick="saveEdits()">Save Changes</button>
+            <div class="edit-saved" id="editSavedMsg"></div>
           </div>
         </div>
         <div class="detail-section">
@@ -4118,7 +4217,106 @@ function populatePlan(){
     document.getElementById('planSaveBtn').disabled=true;
     document.getElementById('planSavedMsg').textContent='Preference saved — cannot be changed.';
   }
+  // Sessions log
+  const sessions=d.sessions?Object.values(d.sessions):[];
+  const sessCard=document.getElementById('sessionsCard');
+  const sessList=document.getElementById('clientSessionList');
+  const sessCount=sessions.length;
+  if(sessCount>0){
+    sessCard.style.display='block';
+    document.getElementById('sessCountBadge').textContent=sessCount+' session'+(sessCount!==1?'s':'');
+    sessList.innerHTML='';
+    sessions.sort((a,b)=>{
+      const da=a.date?new Date(a.date):0, db2=b.date?new Date(b.date):0;
+      return db2-da;
+    });
+    sessions.forEach(sess=>{
+      const item=document.createElement('div');
+      item.className='session-item';
+      item.innerHTML=`
+        <div class="session-item-date">${sess.date||'—'}</div>
+        <div class="session-item-meta">
+          ${sess.coach?`<span>👤 ${sess.coach}</span>`:''}
+          ${sess.duration?`<span>⏱ ${sess.duration}</span>`:''}
+        </div>
+        ${sess.note?`<div class="session-item-note">${sess.note}</div>`:''}`;
+      sessList.appendChild(item);
+    });
+    // Progress bar (only show if plan has confirmed sessions context)
+    const progressWrap=document.getElementById('sessProgressWrap');
+    progressWrap.style.display='block';
+    document.getElementById('sessProgressLbl').textContent=sessCount+' logged';
+    document.getElementById('sessProgressFill').style.width=Math.min(sessCount*10,100)+'%';
+  }
+  // Payment
+  const pay=d.payment||{};
+  const payCard=document.getElementById('paymentCard');
+  if(pay.status||pay.amtDue){
+    payCard.style.display='block';
+    const ps=pay.status||'unpaid';
+    const badge=document.getElementById('payBadgeClient');
+    badge.textContent=ps.charAt(0).toUpperCase()+ps.slice(1);
+    badge.className='pay-badge '+(ps==='paid'?'pay-paid':ps==='partial'?'pay-partial':'pay-unpaid');
+    document.getElementById('payStatusLabel').textContent=ps==='paid'?'Payment complete':ps==='partial'?'Partial payment received':'Payment pending';
+    document.getElementById('payDueClient').textContent=pay.amtDue?'₱'+Number(pay.amtDue).toLocaleString():'₱—';
+    document.getElementById('payPaidClient').textContent=pay.amtPaid?'₱'+Number(pay.amtPaid).toLocaleString():'₱—';
+    if(pay.note){
+      const nb=document.getElementById('payNoteBox');
+      nb.style.display='block';
+      nb.textContent='📋 '+pay.note;
+    }
+    // Balance note
+    const due=parseFloat(pay.amtDue)||0;
+    const paid=parseFloat(pay.amtPaid)||0;
+    const bal=due-paid;
+    if(bal>0&&ps!=='paid'){
+      document.getElementById('payNoteTxt').textContent='Balance: ₱'+bal.toLocaleString();
+    } else if(ps==='paid'){
+      document.getElementById('payNoteTxt').textContent='✓ Fully settled';
+    }
+  }
 }
+
+// ── Edit personal details ──
+window.toggleEditForm=function(){
+  const form=document.getElementById('editForm');
+  const btn=document.getElementById('editToggleBtn');
+  const isOpen=!form.classList.contains('hidden');
+  if(isOpen){
+    form.classList.add('hidden');
+    btn.classList.remove('editing');
+    btn.textContent='✏️ Edit My Info';
+  } else {
+    form.classList.remove('hidden');
+    btn.classList.add('editing');
+    btn.textContent='✕ Cancel';
+    // Pre-fill form fields
+    document.getElementById('editName').value=inquiryData.name||'';
+    document.getElementById('editPhone').value=inquiryData.phone||'';
+    document.getElementById('editMsg').value=inquiryData.message||'';
+  }
+};
+
+window.saveEdits=async function(){
+  const name=document.getElementById('editName').value.trim();
+  const phone=document.getElementById('editPhone').value.trim();
+  const message=document.getElementById('editMsg').value.trim();
+  const savedMsg=document.getElementById('editSavedMsg');
+  if(!name){savedMsg.textContent='Name cannot be empty.';return;}
+  try{
+    await update(ref(db,'inquiries/'+currentInqId),{name,phone,message,updatedAt:Date.now()});
+    inquiryData.name=name; inquiryData.phone=phone; inquiryData.message=message;
+    // Update displayed values
+    document.getElementById('detailName').textContent=name;
+    document.getElementById('detailPhone').textContent=phone||'—';
+    document.getElementById('detailMsg').textContent=message||'—';
+    savedMsg.textContent='✓ Details updated!';
+    setTimeout(()=>{
+      savedMsg.textContent='';
+      toggleEditForm();
+    },1500);
+  }catch(e){savedMsg.textContent='Error saving. Try again.';}
+};
 
 let selectedPref='';
 window.selectPref=function(el,val){
